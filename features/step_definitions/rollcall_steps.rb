@@ -15,7 +15,7 @@ Then /^I should not see a rollcall alert for "([^\"]*)"$/ do |school|
 end
 
 Then /^I should see an "([^\"]*)" rollcall summary for "([^\"]*)" with (.*) absenteeism$/ do |severity, school, percent|
-  school_node = find(:css, ".rollcall_summary .school", :content => school)
+  school_node = all(:css, ".rollcall_summary .school").select {|node| node.text.include?(school)}.first
   assert school_node.find(:css, ".#{severity} .absence").text == percent
 end
 
